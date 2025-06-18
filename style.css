@@ -81,6 +81,7 @@ main{
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   box-shadow: 0 0 15px black;
+  
 }
 
 .field-container div{

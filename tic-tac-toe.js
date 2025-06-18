@@ -29,20 +29,6 @@ function makegameboard(size){
   }
 }
 
-function renderMove(size, gameBoard){
-  field = 0
-  for(let i = 0; i < size; i++){
-    for(let j = 0; j < size; j++){
-      field++
-
-      if(gameBoard[i][j] != ""){
-
-        let div = document.querySelector(`div[data-id="${field}"]`)
-        div.textContent = gameBoard[i][j]
-      }
-    }
-  }
-}
 
 function playGame(size){
   const fieldContainer = document.querySelector(".field-container")
@@ -54,9 +40,10 @@ function playGame(size){
 
 
   fieldContainer.addEventListener("click", (e)=>{
+    renderMove(e)
     findField(e)
-    renderMove(size, gameBoard)
     decideWinner()
+    console.log(gameBoard)
 
   })
 
@@ -82,6 +69,14 @@ function playGame(size){
     }else{
       move = "X"
       player2.move.push(field)
+    }
+  }
+
+  function renderMove(e){
+    const div = document.querySelector(`div[data-id="${e.target.dataset.id}"]`)
+    console.log()
+    if(div.textContent === ""){
+      div.textContent = move
     }
   }
 
