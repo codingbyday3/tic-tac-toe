@@ -1,3 +1,5 @@
+
+
 function makeGameboard(size){
   let gameBoard = []
 
@@ -13,9 +15,26 @@ function makeGameboard(size){
     for(let i = 0; i < size; i++){
       gameBoard.push(gameBoardFields())
     }
-    return gameBoard
+    return { gameBoard }
   }
 }
 
-const gameBoard3x3 = makeGameboard(3)
-console.log(gameBoard3x3())
+
+function displayMove(size){
+  const generatedGameBoard = makeGameboard(size)().gameBoard
+  document.addEventListener("click", (e)=>{
+    field = 0
+    for(let i = 0; i < size; i++){
+      for(let j = 0; j < size; j++){
+        field++
+        if(Number(e.target.dataset.id) === field){
+          generatedGameBoard[i][j] = "x"
+          console.log(generatedGameBoard)
+        }
+      }
+    }
+  })
+
+}
+
+
