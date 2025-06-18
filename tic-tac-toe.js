@@ -81,6 +81,10 @@ function playGame(size){
   }
 
   function decideWinner(){
+    if(player1.score.length === 3 || player2.score.length === 3){
+      player1.score = []
+      player2.score = []
+    }
     for(let winningPosition of winningPositions){
       let isXWin = winningPosition.every(field => player1.move.includes(field))
       let isOWin = winningPosition.every(field => player2.move.includes(field))
