@@ -1,20 +1,16 @@
 function generatePlayers(){
 
-  const player1 = {
-    score: 0,
-    move: "X"
+  const player = {
+    score: [],
+    move: []
   }
 
-  const player2 = {
-    score: 0,
-    move: "O"
-  }
 
-  return { player1, player2 }
+  return { player }
 }
 
 
-function makeGameboard(size){
+function makegameboard(size){
   let gameBoard = []
 
   const gameBoardFields = function(){
@@ -50,16 +46,19 @@ function renderMove(size, gameBoard){
 
 function playGame(size){
   const fieldContainer = document.querySelector(".field-container")
-  let move = generatePlayers().player1.move
-  let generatedGameBoard = makeGameboard(size)().gameBoard
+  const player1 = generatePlayers().player
+  const player2 = generatePlayers().player
+  let move = "X"
+  let gameBoard = makegameboard(size)().gameBoard
   const winningPositions = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [7, 8, 9], [3, 5, 7], [3, 6, 9], [4, 5, 6], [2, 5, 8]]
-  let XMoves = []
-  let OMoves = []
+
 
   fieldContainer.addEventListener("click", (e)=>{
     findField(e)
-    renderMove(size, generatedGameBoard)
+    renderMove(size, gameBoard)
     decideWinner()
+    console.log(player1.score)
+    console.log(player2.score)
   })
 
   function findField(e){
@@ -68,9 +67,9 @@ function playGame(size){
       for(let j = 0; j < size; j++){
         field++
         if(Number(e.target.dataset.id) === field){
-          generatedGameBoard[i][j] = move
+         gameBoard[i][j] = move
           changeMove(field)
-          console.log(generatedGameBoard)
+          console.log (gameBoard)
           
         }
       }
@@ -81,37 +80,45 @@ function playGame(size){
   function changeMove(field){
     if(move === "X"){
       move = "O"
-      XMoves.push(field)
+      player1.move.push(field)
     }else{
       move = "X"
-      OMoves.push(field)
+      player2.move.push(field)
     }
   }
 
   function decideWinner(){
     for(let winningPosition of winningPositions){
-      let isXWin = winningPosition.every(field => XMoves.includes(field))
-      let isOWin = winningPosition.every(field => OMoves.includes(field))
+      let isXWin = winningPosition.every(field => player1.move.includes(field))
+      let isOWin = winningPosition.every(field => player2.move.includes(field))
 
       if(isXWin){
-        console.log("X win")
         reset()
+        player1.score.push("win")
         break
       }else if(isOWin){
-        console.log("O win")
         reset()
+        player2.score.push("win")
         break
       }
     }
   }
 
   function reset(){
-    XMoves = []
-    OMoves = []
-    generatedGameBoard = makeGameboard(size)().gameBoard
-    move = generatePlayers().player1.move
-    const fieldContainer = document.querySelector(".field-container")
-    fieldContainer.classList.add("disable-click") 
+    player1.move = []
+    player2.move = []
+    move = "X"
+    let field = 0
+    gameBoard = makegameboard(size)().gameBoard
+    for(let i = 0; i < size; i++){
+      for(let j = 0; j < size; j++){
+        const div = document.querySelector(`div[data-id="${field}"]`);
+        if (div) {
+          div.textContent = ""; 
+        }
+        field++;
+      }
+    }
   }
 
 } 

@@ -2,6 +2,7 @@
   /* colors */
   --clr-yellow-300: #FFD60A;
   --clr-yellow-500: #FFC300;
+  --clr-yellow-700:#a78000;
   --clr-blue-700: #000814;
   --clr-blue-600: #001D3D;
   --clr-blue-500: #003566;
@@ -68,7 +69,7 @@ header{
 main{
   background-color: var(--clr-header);
   display: flex;
-  gap: 50px;
+  gap: 70px;
   justify-content: center;
   align-items: center;
 }
@@ -112,6 +113,17 @@ main{
 .disable-click{
   pointer-events: none;
 }
+
+.result-table{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.result-table h2{
+  font-size: 2rem;
+}
 table{
   width: 20vw;
   height: 20vw;
@@ -122,11 +134,14 @@ table, th, td{
 }
 td, th{
   text-align: center;
+
 }
 th{
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
-
+tfoot{
+  display: none;
+}
 tbody tr:nth-child(odd){
-  background-color: var(--clr-yellow-500);
+  background-color: var(--clr-yellow-700);
 }
