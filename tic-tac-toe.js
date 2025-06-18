@@ -1,3 +1,37 @@
+function playGame(size){
+
+  let move = generatePlayers().player1.move
+  const generatedGameBoard = makeGameboard(size)().gameBoard
+
+  document.addEventListener("click", (e)=>{
+    findField(e)
+  })
+
+  function findField(e){
+    field = 0
+    for(let i = 0; i < size; i++){
+      for(let j = 0; j < size; j++){
+        field++
+        if(Number(e.target.dataset.id) === field){
+          generatedGameBoard[i][j] = move
+          changeMove()
+          console.log(generatedGameBoard)
+        }
+      }
+    }
+  }
+  
+
+  function changeMove(){
+    if(move === "X"){
+      move = "O"
+    }else{
+      move = "X"
+    }
+  }
+
+}
+
 function generatePlayers(){
 
   const player1 = {
@@ -34,28 +68,8 @@ function makeGameboard(size){
 }
 
 
-function displayMove(size){
-  let move = generatePlayers().player1.move
-  const generatedGameBoard = makeGameboard(size)().gameBoard
-  document.addEventListener("click", (e)=>{
-    field = 0
-    for(let i = 0; i < size; i++){
-      for(let j = 0; j < size; j++){
-        field++
-        if(Number(e.target.dataset.id) === field){
-          generatedGameBoard[i][j] = move
-          if(move === "X"){
-            move = "O"
-          }else{
-            move = "X"
-          }
-          console.log(generatedGameBoard)
-        }
-      }
-    }
-  })
-
-}
+playGame(3)
 
 
-displayMove(3)
+
+
