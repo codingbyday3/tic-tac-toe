@@ -34,14 +34,14 @@ function makeGameboard(size){
 }
 
 function playGame(size){
-
+  const main = document.querySelector("main")
   let move = generatePlayers().player1.move
   let generatedGameBoard = makeGameboard(size)().gameBoard
   const winningPositions = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [7, 8, 9], [3, 5, 7], [3, 6, 9], [4, 5, 6], [2, 5, 8]]
   let XMoves = []
   let OMoves = []
 
-  document.addEventListener("click", (e)=>{
+  main.addEventListener("click", (e)=>{
     findField(e)
   })
 
