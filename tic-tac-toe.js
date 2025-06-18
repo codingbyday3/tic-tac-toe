@@ -35,7 +35,7 @@ function makeGameboard(size){
 
 
 function displayMove(size){
-  const firstMove = "x"
+  let move = generatePlayers().player1.move
   const generatedGameBoard = makeGameboard(size)().gameBoard
   document.addEventListener("click", (e)=>{
     field = 0
@@ -43,7 +43,12 @@ function displayMove(size){
       for(let j = 0; j < size; j++){
         field++
         if(Number(e.target.dataset.id) === field){
-          generatedGameBoard[i][j] = "x"
+          generatedGameBoard[i][j] = move
+          if(move === "X"){
+            move = "O"
+          }else{
+            move = "X"
+          }
           console.log(generatedGameBoard)
         }
       }
@@ -52,3 +57,5 @@ function displayMove(size){
 
 }
 
+
+displayMove(3)
