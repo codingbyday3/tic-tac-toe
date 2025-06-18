@@ -144,6 +144,10 @@ td, th{
   text-align: center;
 
 }
+tr,
+td{
+  height: 40px;
+}
 th{
   font-size: 1.2rem;
 }

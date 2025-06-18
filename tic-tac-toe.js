@@ -43,7 +43,7 @@ function playGame(size){
     renderMove(e)
     findField(e)
     decideWinner()
-    console.log(gameBoard)
+
 
   })
 
@@ -92,10 +92,14 @@ function playGame(size){
       if(isXWin){
         reset()
         player1.score.push("win")
+        player2.score.push("Lose")
+        displayResultTable()
         break
       }else if(isOWin){
         reset()
         player2.score.push("win")
+        player1.score.push("lose")
+        displayResultTable()
         break
       }
     }
@@ -115,6 +119,19 @@ function playGame(size){
         }
         field++;
       }
+    }
+  }
+
+  function displayResultTable(){
+    player1WinsNumber = player1.score.length
+
+
+    for(let i = 1; i < player1WinsNumber+1; i++ ){
+      const leftSideTable = document.querySelector(`#table-left-${i}`)
+      const rightSideTable = document.querySelector(`#table-right-${i}`)
+
+      leftSideTable.textContent = player1.score[i-1]
+      rightSideTable.textContent = player2.score[i-1]
     }
   }
 
