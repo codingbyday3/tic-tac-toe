@@ -72,6 +72,7 @@ main{
   gap: 70px;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .field-container{
@@ -157,3 +158,4 @@ tfoot{
 tbody tr:nth-child(odd){
   background-color: var(--clr-yellow-700);
 }
+

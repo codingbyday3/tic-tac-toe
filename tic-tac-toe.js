@@ -1,7 +1,7 @@
 function generatePlayers(){
 
   const player = {
-    score: [],
+    score: 0,
     move: []
   }
 
@@ -37,6 +37,7 @@ function playGame(size){
   let move = "X"
   let gameBoard = makegameboard(size)().gameBoard
   const winningPositions = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [7, 8, 9], [3, 5, 7], [3, 6, 9], [4, 5, 6], [2, 5, 8]]
+  let round = 1
 
 
   fieldContainer.addEventListener("click", (e)=>{
@@ -81,28 +82,47 @@ function playGame(size){
   }
 
   function decideWinner(){
-    if(player1.score.length === 3 || player2.score.length === 3){
-      player1.score = []
-      player2.score = []
-    }
     for(let winningPosition of winningPositions){
       let isXWin = winningPosition.every(field => player1.move.includes(field))
       let isOWin = winningPosition.every(field => player2.move.includes(field))
 
       if(isXWin){
         reset()
-        player1.score.push("win")
-        player2.score.push("Lose")
-        displayResultTable()
+        player1.score++
+        displayResultTable("player1")
+
         break
       }else if(isOWin){
         reset()
-        player2.score.push("win")
-        player1.score.push("lose")
-        displayResultTable()
+        player2.score++
+        displayResultTable("player2")
+
         break
       }
     }
+    if(player1.score === 3 || player2.score === 3){
+      const tableFooter = document.querySelector("tfoot")
+      const tableLeftResult = document.querySelector("#table-left-result")
+      const tableRightResult = document.querySelector("#table-right-result")
+      const resultTable = document.querySelector(".field-container")
+
+      
+      resultTable.classList.add("disable-click")
+      tableFooter.style.display = "table-footer-group"
+      if(player1.score === 3){
+        tableLeftResult.textContent = "Winner"
+        tableRightResult.textContent = "Loser"
+      }else{
+        tableLeftResult.textContent = "Loser"
+        tableRightResult.textContent = "winner"
+      }
+    // player1.score = []
+    // player2.score = []
+    // for(let i = 1; i <= 3; i++ ){
+    //   document.querySelector(`#table-left-${i}`).textContent = ""
+    //   document.querySelector(`#table-right-${i}`).textContent = ""
+    // }
+  }
   }
 
   function reset(){
@@ -122,17 +142,18 @@ function playGame(size){
     }
   }
 
-  function displayResultTable(){
-    player1WinsNumber = player1.score.length
+  function displayResultTable(winner){
+    const leftSideTable = document.querySelector(`#table-left-${round}`)
+    const rightSideTable = document.querySelector(`#table-right-${round}`)
 
-
-    for(let i = 1; i < player1WinsNumber+1; i++ ){
-      const leftSideTable = document.querySelector(`#table-left-${i}`)
-      const rightSideTable = document.querySelector(`#table-right-${i}`)
-
-      leftSideTable.textContent = player1.score[i-1]
-      rightSideTable.textContent = player2.score[i-1]
+    if(winner === "player1"){
+      leftSideTable.textContent = "Winner"
+      rightSideTable.textContent = "Loser"
+    }else{
+      leftSideTable.textContent = "Loser"
+      rightSideTable.textContent = "Winner"  
     }
+    round++
   }
 
 } 
