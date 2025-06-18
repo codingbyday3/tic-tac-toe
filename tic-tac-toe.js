@@ -52,8 +52,8 @@ function playGame(size){
   })
 
   restartBtn.addEventListener("click", ()=>{
-    player1.score = []
-    player2.score = []
+
+    reset()
     for(let i = 1; i <= 5; i++ ){
       document.querySelector(`#table-left-${i}`).textContent = ""
       document.querySelector(`#table-right-${i}`).textContent = ""
@@ -74,9 +74,9 @@ function playGame(size){
       for(let j = 0; j < size; j++){
         field++
         if(Number(e.target.dataset.id) === field && gameBoard[i][j] === ""){
-         gameBoard[i][j] = move
+          gameBoard[i][j] = move
           changeMove(field)
-          
+          break
         }
       }
     }
@@ -107,6 +107,7 @@ function playGame(size){
       let isOWin = winningPosition.every(field => player2.move.includes(field))
 
       if(isXWin){
+
         reset()
         player1.score++
         displayResultTable("player1")
@@ -136,7 +137,12 @@ function playGame(size){
         tableLeftResult.textContent = "Loser"
         tableRightResult.textContent = "winner"
       }
-  }
+      return;
+    }
+
+    if(player1.move.length === 5 || player2.move.length === 5){
+      reset()
+    }
   }
 
   function reset(){
@@ -169,6 +175,7 @@ function playGame(size){
     }
     round++
   }
+
 
 
 

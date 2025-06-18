@@ -166,3 +166,18 @@ tbody tr:nth-child(odd){
   white-space: nowrap;
   visibility: hidden;
 }
+
+.restart-btn{
+  padding: 5px 30px;
+  border: none;
+  background-color: var(--clr-blue-500);
+  color: var(--clr-yellow-300);
+  border-radius: 10px;
+  box-shadow: 0 0 20px black;
+}
+
+.restart-btn:hover{
+  box-shadow: 3px 3px 20px black;
+  background-color: var(--clr-blue-600);
+  cursor: pointer;
+}
