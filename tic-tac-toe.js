@@ -57,8 +57,7 @@ function playGame(size){
     findField(e)
     renderMove(size, gameBoard)
     decideWinner()
-    console.log(player1.score)
-    console.log(player2.score)
+
   })
 
   function findField(e){
@@ -66,10 +65,9 @@ function playGame(size){
     for(let i = 0; i < size; i++){
       for(let j = 0; j < size; j++){
         field++
-        if(Number(e.target.dataset.id) === field){
+        if(Number(e.target.dataset.id) === field && gameBoard[i][j] === ""){
          gameBoard[i][j] = move
           changeMove(field)
-          console.log (gameBoard)
           
         }
       }
@@ -108,7 +106,7 @@ function playGame(size){
     player1.move = []
     player2.move = []
     move = "X"
-    let field = 0
+    let field = 1
     gameBoard = makegameboard(size)().gameBoard
     for(let i = 0; i < size; i++){
       for(let j = 0; j < size; j++){

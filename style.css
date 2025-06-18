@@ -96,6 +96,11 @@ main{
   font-size: 4vw;
 }
 
+.field-container div div:hover{
+  background-color: var(--clr-blue-600);
+  cursor: pointer;
+}
+
 .container1{
   grid-row: 1 / 2;
 
@@ -127,10 +132,12 @@ main{
 table{
   width: 20vw;
   height: 20vw;
+  box-shadow: 0 0 15px black;
 }
 table, th, td{
   border: 3px solid var(--clr-blue-600);
   border-collapse: collapse;
+
 }
 td, th{
   text-align: center;
