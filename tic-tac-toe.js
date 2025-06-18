@@ -33,16 +33,30 @@ function makeGameboard(size){
   }
 }
 
+function renderMove(size, gameBoard){
+  field = 0
+  for(let i = 0; i < size; i++){
+    for(let j = 0; i < size; i++){
+      field++
+      if(gameBoard[i][j] != ""){
+        let div = document.querySelector(`div[data-id="${field}"]`)
+        div.textContent = gameBoard[i][j]
+      }
+    }
+  }
+}
+
 function playGame(size){
-  const main = document.querySelector("main")
+  const fieldContainer = document.querySelector(".field-container")
   let move = generatePlayers().player1.move
   let generatedGameBoard = makeGameboard(size)().gameBoard
   const winningPositions = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [7, 8, 9], [3, 5, 7], [3, 6, 9], [4, 5, 6], [2, 5, 8]]
   let XMoves = []
   let OMoves = []
 
-  main.addEventListener("click", (e)=>{
+  fieldContainer.addEventListener("click", (e)=>{
     findField(e)
+    renderMove(size, generatedGameBoard)
   })
 
   function findField(e){
