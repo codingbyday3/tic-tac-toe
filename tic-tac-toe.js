@@ -32,6 +32,9 @@ function makegameboard(size){
 
 function playGame(size){
   const fieldContainer = document.querySelector(".field-container")
+  const restartBtn = document.querySelector(".restart-btn")
+  const warrningText = document.querySelector(".warrning")
+
   const player1 = generatePlayers().player
   const player2 = generatePlayers().player
   let move = "X"
@@ -46,6 +49,23 @@ function playGame(size){
     decideWinner()
 
 
+  })
+
+  restartBtn.addEventListener("click", ()=>{
+    player1.score = []
+    player2.score = []
+    for(let i = 1; i <= 5; i++ ){
+      document.querySelector(`#table-left-${i}`).textContent = ""
+      document.querySelector(`#table-right-${i}`).textContent = ""
+    }
+    document.querySelector("#table-left-result").textContent = ""
+    document.querySelector("#table-right-result").textContent = ""
+
+    fieldContainer.classList.remove("disable-click")
+    warrningText.style.visibility = "hidden"
+    round = 1
+    player1.score = 0
+    player2.score = 0
   })
 
   function findField(e){
@@ -104,10 +124,10 @@ function playGame(size){
       const tableFooter = document.querySelector("tfoot")
       const tableLeftResult = document.querySelector("#table-left-result")
       const tableRightResult = document.querySelector("#table-right-result")
-      const resultTable = document.querySelector(".field-container")
 
       
-      resultTable.classList.add("disable-click")
+      warrningText.style.visibility = "visible"
+      fieldContainer.classList.add("disable-click")
       tableFooter.style.display = "table-footer-group"
       if(player1.score === 3){
         tableLeftResult.textContent = "Winner"
@@ -116,12 +136,6 @@ function playGame(size){
         tableLeftResult.textContent = "Loser"
         tableRightResult.textContent = "winner"
       }
-    // player1.score = []
-    // player2.score = []
-    // for(let i = 1; i <= 3; i++ ){
-    //   document.querySelector(`#table-left-${i}`).textContent = ""
-    //   document.querySelector(`#table-right-${i}`).textContent = ""
-    // }
   }
   }
 
@@ -155,6 +169,8 @@ function playGame(size){
     }
     round++
   }
+
+
 
 } 
 
