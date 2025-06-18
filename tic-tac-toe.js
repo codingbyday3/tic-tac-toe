@@ -1,37 +1,3 @@
-function playGame(size){
-
-  let move = generatePlayers().player1.move
-  const generatedGameBoard = makeGameboard(size)().gameBoard
-
-  document.addEventListener("click", (e)=>{
-    findField(e)
-  })
-
-  function findField(e){
-    field = 0
-    for(let i = 0; i < size; i++){
-      for(let j = 0; j < size; j++){
-        field++
-        if(Number(e.target.dataset.id) === field){
-          generatedGameBoard[i][j] = move
-          changeMove()
-          console.log(generatedGameBoard)
-        }
-      }
-    }
-  }
-  
-
-  function changeMove(){
-    if(move === "X"){
-      move = "O"
-    }else{
-      move = "X"
-    }
-  }
-
-}
-
 function generatePlayers(){
 
   const player1 = {
@@ -66,6 +32,72 @@ function makeGameboard(size){
     return { gameBoard }
   }
 }
+
+function playGame(size){
+
+  let move = generatePlayers().player1.move
+  let generatedGameBoard = makeGameboard(size)().gameBoard
+  const winningPositions = [[1, 2, 3], [1, 4, 7], [1, 5, 9], [7, 8, 9], [3, 5, 7], [3, 6, 9], [4, 5, 6], [2, 5, 8]]
+  let XMoves = []
+  let OMoves = []
+
+  document.addEventListener("click", (e)=>{
+    findField(e)
+  })
+
+  function findField(e){
+    field = 0
+    for(let i = 0; i < size; i++){
+      for(let j = 0; j < size; j++){
+        field++
+        if(Number(e.target.dataset.id) === field){
+          generatedGameBoard[i][j] = move
+          changeMove(field)
+          console.log(generatedGameBoard)
+          decideWinner()
+          
+        }
+      }
+    }
+  }
+  
+
+  function changeMove(field){
+    if(move === "X"){
+      move = "O"
+      XMoves.push(field)
+    }else{
+      move = "X"
+      OMoves.push(field)
+    }
+  }
+
+  function decideWinner(){
+    for(let winningPosition of winningPositions){
+      let isXWin = winningPosition.every(field => XMoves.includes(field))
+      let isOWin = winningPosition.every(field => OMoves.includes(field))
+
+      if(isXWin){
+        console.log("X win")
+        reset()
+        break
+      }else if(isOWin){
+        console.log("O win")
+        reset()
+        break
+      }
+    }
+  }
+
+  function reset(){
+    XMoves = []
+    OMoves = []
+    generatedGameBoard = makeGameboard(size)().gameBoard
+    move = generatePlayers().player1.move
+  }
+
+}
+
 
 
 playGame(3)
