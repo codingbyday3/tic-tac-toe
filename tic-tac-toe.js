@@ -110,9 +110,11 @@ function playGame(size){
     OMoves = []
     generatedGameBoard = makeGameboard(size)().gameBoard
     move = generatePlayers().player1.move
+    const fieldContainer = document.querySelector(".field-container")
+    fieldContainer.classList.add("disable-click") 
   }
 
-}
+} 
 
 
 

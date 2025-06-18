@@ -68,7 +68,7 @@ header{
 main{
   background-color: var(--clr-header);
   display: flex;
-  flex-direction: column;
+  gap: 50px;
   justify-content: center;
   align-items: center;
 }
@@ -107,4 +107,26 @@ main{
 .container3{
   grid-row: 3 / 4;
 
+}
+
+.disable-click{
+  pointer-events: none;
+}
+table{
+  width: 20vw;
+  height: 20vw;
+}
+table, th, td{
+  border: 3px solid var(--clr-blue-600);
+  border-collapse: collapse;
+}
+td, th{
+  text-align: center;
+}
+th{
+  font-size: 1.3rem;
+}
+
+tbody tr:nth-child(odd){
+  background-color: var(--clr-yellow-500);
 }
