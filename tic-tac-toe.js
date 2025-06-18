@@ -1,3 +1,17 @@
+function generatePlayers(){
+
+  const player1 = {
+    score: 0,
+    move: "X"
+  }
+
+  const player2 = {
+    score: 0,
+    move: "O"
+  }
+
+  return { player1, player2 }
+}
 
 
 function makeGameboard(size){
@@ -21,6 +35,7 @@ function makeGameboard(size){
 
 
 function displayMove(size){
+  const firstMove = "x"
   const generatedGameBoard = makeGameboard(size)().gameBoard
   document.addEventListener("click", (e)=>{
     field = 0
@@ -36,5 +51,4 @@ function displayMove(size){
   })
 
 }
-
 
