@@ -36,9 +36,11 @@ function makeGameboard(size){
 function renderMove(size, gameBoard){
   field = 0
   for(let i = 0; i < size; i++){
-    for(let j = 0; i < size; i++){
+    for(let j = 0; j < size; j++){
       field++
+
       if(gameBoard[i][j] != ""){
+
         let div = document.querySelector(`div[data-id="${field}"]`)
         div.textContent = gameBoard[i][j]
       }
@@ -57,6 +59,7 @@ function playGame(size){
   fieldContainer.addEventListener("click", (e)=>{
     findField(e)
     renderMove(size, generatedGameBoard)
+    decideWinner()
   })
 
   function findField(e){
@@ -68,7 +71,6 @@ function playGame(size){
           generatedGameBoard[i][j] = move
           changeMove(field)
           console.log(generatedGameBoard)
-          decideWinner()
           
         }
       }
